@@ -28,7 +28,7 @@ router.post("/signup", async (req, res) => {
       return res.status(400).send("Please enter a password that is at least 8 characters long.")
     }
 
-    const existingUser = await User.findOne({ options: { email: email } });
+    const existingUser = await User.findOne({ where: { email: email } });
     if (existingUser) {
       return res.status(400).send("An account with this email already exists.")
     };
@@ -63,7 +63,7 @@ router.post("/login", async (req, res) => {
       return res.status(400).send("Please enter all required fields.")
     }
 
-    const existingUser = await User.findOne({ options: { email: email } });
+    const existingUser = await User.findOne({ where: { email: email } });
     if (!existingUser) {
       return res.status(401).send("Wrong email or password");
     }
