@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
 
-const oAuthConfig = {
-    dev: {
+const config = {
+    development: {
         googleClientId: process.env.GOOGLE_CLIENT_ID,
         googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
         serverRootUI: "http://localhost:3001",
@@ -18,7 +18,7 @@ const oAuthConfig = {
         jwtSecret: "VsxSQyW?yQCJ?esT59*Vgur7SCPEHtGK-Fdf!vD&$%&tF@?T#=",
         cookieName: "auth_token"
     },
-    prod: {
+    production: {
         googleClientId: process.env.GOOGLE_CLIENT_ID,
         googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
         serverRootUI: "<prod server location here>",
@@ -28,4 +28,4 @@ const oAuthConfig = {
     }
 }
 
-export default oAuthConfig;
+module.exports = config;
