@@ -14,6 +14,22 @@ User.init(
             primaryKey: true,
             autoIncrement: true
         },
+        googleId: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        first_name: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        last_name: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        googlePicture: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
