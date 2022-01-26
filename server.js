@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const config = require("./config/oAuthConfig");
 const sequelize = require("./config/dbConfig");
-const model = require("./models/index");
+const routes = require("./routes");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -41,8 +41,7 @@ app.use(
         credentials: true,
     })
 );
-
-// app.use("/auth", require("./routes/userRoutes"));
+app.use(routes);
 
 // Start Server
 app.listen(PORT, () => {
