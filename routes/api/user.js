@@ -3,6 +3,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { User } = require("../../models");
 const config = require("../../config/oAuthConfig");
+const dotenv = require("dotenv");
+dotenv.config();
+
 let oAuthConfig = {};
 switch (process.env.NODE_ENV) {
   case "development":

@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/jmasone15/react-oauth2-boilerplate#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -27,6 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
+    "querystring": "^0.2.1",
     "sequelize": "^6.14.1"
   }
 }
