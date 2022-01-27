@@ -1,11 +1,17 @@
 import './App.css';
 import Router from "./Router";
+import axios from 'axios';
+import { AuthContextProvider } from "./context/AuthContext";
+import { UserContextProvider } from "./context/UserContext";
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
-    <>
-      <Router />
-    </>
+    <AuthContextProvider>
+      <UserContextProvider>
+        <Router />
+      </UserContextProvider>
+    </AuthContextProvider>
   );
 }
 
