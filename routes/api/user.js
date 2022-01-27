@@ -49,7 +49,7 @@ router.post("/signup", async (req, res) => {
       maxAge: 900000,
       httpOnly: true,
       secure: false
-    }).status(200).json(newUser);
+    }).status(200);
 
   } catch (err) {
     console.error(err);
@@ -84,7 +84,7 @@ router.post("/login", async (req, res) => {
       maxAge: 900000,
       httpOnly: true,
       secure: false
-    }).status(200).json(existingUser);
+    }).status(200);
 
   } catch (err) {
     console.error(err);
