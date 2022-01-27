@@ -50,18 +50,59 @@ router.get(redirectURI, async (req, res) => {
         throw new Error(error.message);
     });
 
-    console.log(googleUser)
+    console.log(googleUser);
 
-    const token = jwt.sign(googleUser, oAuthConfig.jwtSecret);
+    try {
+        const existingUser = await User.findOne({ where: { email: googleUser.email } });
 
-    res.cookie(oAuthConfig.cookieName, token, {
-        maxAge: 900000,
-        httpOnly: true,
-        // Should be turned on for the deployed Server.
-        secure: false
-    });
+        if (existingUser) {
+            const correctId = await bcrypt.compare(googleUser.id, existingUser.password);
+            if (!correctId) {
+                return res.status(400).send("Something went wrong with oAuth2.0").redirect(oAuthConfig.uiRootUI);
+            }
 
-    res.redirect(oAuthConfig.uiRootUI);
+            const token = jwt.sign({
+                userId: existingUser.id
+            }, oAuthConfig.jwtSecret);
+
+            res.cookie("token", token, {
+                maxAge: 900000,
+                httpOnly: true,
+                secure: false
+            }).status(200);
+
+            return res.redirect(oAuthConfig.uiRootUI);
+
+        } else {
+            const salt = await bcrypt.genSalt();
+            const googleIdHash = await bcrypt.hash(googleUser.id, salt);
+
+            const newUser = await User.create({
+                first_name: googleUser.given_name,
+                last_name: googleUser.family_name,
+                googlePicture: googleUser.picture,
+                email: googleUser.email,
+                password: googleIdHash,
+                isGoogle: true
+            });
+
+            const token = jwt.sign({
+                userId: newUser.id
+            }, oAuthConfig.jwtSecret);
+
+            res.cookie("token", token, {
+                maxAge: 900000,
+                httpOnly: true,
+                secure: false
+            }).status(200);
+
+            return res.redirect(oAuthConfig.uiRootUI);
+
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).redirect(oAuthConfig.uiRootUI);
+    }
 });
 
 module.exports = router;

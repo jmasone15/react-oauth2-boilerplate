@@ -7,7 +7,7 @@ const config = {
         googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
         serverRootUI: "http://localhost:3001",
         uiRootUI: "http://localhost:3000",
-        jwtSecret: "VsxSQyW?yQCJ?esT59*Vgur7SCPEHtGK-Fdf!vD&$%&tF@?T#=",
+        jwtSecret: process.env.JWT_SECRET,
         cookieName: "auth_token"
     },
     test: {
@@ -15,7 +15,7 @@ const config = {
         googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
         serverRootUI: "<test server location here>",
         uiRootUI: "<test website location here>",
-        jwtSecret: "VsxSQyW?yQCJ?esT59*Vgur7SCPEHtGK-Fdf!vD&$%&tF@?T#=",
+        jwtSecret: process.env.JWT_SECRET,
         cookieName: "auth_token"
     },
     production: {
@@ -23,7 +23,7 @@ const config = {
         googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
         serverRootUI: "<prod server location here>",
         uiRootUI: "<prod website location here>",
-        jwtSecret: "VsxSQyW?yQCJ?esT59*Vgur7SCPEHtGK-Fdf!vD&$%&tF@?T#=",
+        jwtSecret: process.env.JWT_SECRET,
         cookieName: "auth_token"
     }
 }
