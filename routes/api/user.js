@@ -49,11 +49,11 @@ router.post("/signup", async (req, res) => {
       maxAge: 900000,
       httpOnly: true,
       secure: false
-    }).status(200);
+    }).status(200).send("Success");
 
   } catch (err) {
     console.error(err);
-    return res.status(500).send();
+    return res.status(500).send("Error");
   }
 
 });
@@ -84,11 +84,11 @@ router.post("/login", async (req, res) => {
       maxAge: 900000,
       httpOnly: true,
       secure: false
-    }).status(200);
+    }).status(200).send("Success");
 
   } catch (err) {
     console.error(err);
-    return res.status(500).send();
+    return res.status(500).send("Error");
   }
 });
 
@@ -118,7 +118,7 @@ router.get("/profile/:id", async (req, res) => {
     res.json(userInfo);
   } catch (err) {
     console.error(err);
-    return res.status(500).send();
+    return res.status(500).send("Success");
   }
 });
 
