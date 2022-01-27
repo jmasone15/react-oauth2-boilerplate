@@ -47,7 +47,7 @@ router.post("/signup", async (req, res) => {
 
     return res.cookie("token", token, {
       maxAge: 900000,
-      httpOnly: true,
+      httpOnly: false,
       secure: false
     }).status(200).send("Success");
 
@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
 
     return res.cookie("token", token, {
       maxAge: 900000,
-      httpOnly: true,
+      httpOnly: false,
       secure: false
     }).status(200).send("Success");
 
@@ -94,7 +94,7 @@ router.post("/login", async (req, res) => {
 
 router.get("/logout", (req, res) => {
   return res.cookie("token", "", {
-    httpOnly: true,
+    httpOnly: false,
     expires: new Date(0)
   }).send();
 });

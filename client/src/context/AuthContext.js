@@ -17,7 +17,7 @@ function AuthContextProvider(props) {
     async function getUserId() {
         if (loggedIn) {
             const token = document.cookie;
-            const payload = JSON.parse(window.atob(token.split('.')[1]))
+            const payload = JSON.parse(window.atob(token.split('.')[1]));
             const id = payload.userId;
             setUserId(id);
         }

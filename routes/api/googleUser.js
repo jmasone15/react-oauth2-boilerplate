@@ -67,7 +67,7 @@ router.get(redirectURI, async (req, res) => {
 
             res.cookie("token", token, {
                 maxAge: 900000,
-                httpOnly: true,
+                httpOnly: false,
                 secure: false
             }).status(200);
 
@@ -92,7 +92,7 @@ router.get(redirectURI, async (req, res) => {
 
             res.cookie("token", token, {
                 maxAge: 900000,
-                httpOnly: true,
+                httpOnly: false,
                 secure: false
             }).status(200);
 
