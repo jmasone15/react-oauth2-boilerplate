@@ -10,6 +10,7 @@
 
 .nav-li {
   float: right;
+  cursor: pointer;
 }
 
 .nav-link {
