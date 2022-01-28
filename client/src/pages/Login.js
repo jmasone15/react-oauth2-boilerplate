@@ -9,10 +9,21 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [view, setView] = useState("login");
   const { getLoggedIn } = useContext(AuthContext);
+  const [google, setGoogle] = useState(false);
   const navigate = useNavigate();
 
   async function Login(e) {
     e.preventDefault();
+
+    if (google) {
+      try {
+        const googleUrl = await axios.get("/api/google/url");
+        return window.location.assign(googleUrl.data);
+      } catch (err) {
+        console.error(err);
+        alert(err.request.response);
+      }
+    }
 
     try {
       const loginData = {
@@ -31,6 +42,10 @@ export default function Login() {
 
   async function SignUp(e) {
     e.preventDefault();
+
+    if (google) {
+      return console.log("test")
+    }
 
     try {
       const signUpData = {
@@ -60,7 +75,6 @@ export default function Login() {
                 placeholder="Email Address"
                 autoComplete="email"
                 autoFocus
-                required
                 onChange={(e) => setEmail(e.target.value)}
               />
               <br />
@@ -71,12 +85,12 @@ export default function Login() {
                 name="password"
                 placeholder="Password"
                 autoComplete="current-password"
-                required
                 onChange={(e) => setPassword(e.target.value)}
               />
               <br />
               <br />
               <button type="submit">Login</button>
+              <button style={{backgroundColor: "blue", marginLeft: "25px"}} onClick={() => setGoogle(true)}>Login with Google</button>
             </form>
           </div>
           <br />
@@ -115,6 +129,7 @@ export default function Login() {
               <br />
               <br />
               <button type="submit">Sign Up</button>
+              <button style={{backgroundColor: "blue", marginLeft: "25px"}} onClick={() => setGoogle(true)}>Login with Google</button>
             </form>
           </div>
           <br />

@@ -34,7 +34,6 @@ router.get(redirectURI, async (req, res) => {
         clientId: oAuthConfig.googleClientId,
         clientSecret: oAuthConfig.googleClientSecret
     });
-    console.log(response);
 
     const googleUser = await axios.get(
         `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${response.access_token}`,
@@ -50,7 +49,6 @@ router.get(redirectURI, async (req, res) => {
         throw new Error(error.message);
     });
 
-    console.log(googleUser);
 
     try {
         const existingUser = await User.findOne({ where: { email: googleUser.email } });
