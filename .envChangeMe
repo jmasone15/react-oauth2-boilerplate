@@ -1,0 +1,7 @@
+GOOGLE_CLIENT_ID=<Update Me>
+GOOGLE_CLIENT_SECRET=<Update Me>
+JWT_SECRET=<Update Me>
+NODE_ENV=development
+DB_NAME=OAUTH2_DB
+DB_USER=<Update Me>
+DB_PW=<Update Me>
