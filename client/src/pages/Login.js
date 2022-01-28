@@ -27,36 +27,101 @@ export default function Login() {
       console.error(err);
       alert(err.request.response);
     }
+  };
+
+  async function SignUp(e) {
+    e.preventDefault();
+
+    try {
+      const signUpData = {
+        email: email,
+        password: password
+      };
+
+      await axios.post("/api/user/signup", signUpData);
+      await getLoggedIn();
+    } catch (err) {
+      console.error(err);
+      alert(err.request.response);
+    }
   }
 
   return (
-    <div className="App">
-      <h1>Login Page</h1>
-      <div className="login-form">
-        <form onSubmit={Login}>
-          <input
-            type="text"
-            id="email"
-            name="email"
-            placeholder="Email Address"
-            autoComplete="email"
-            autoFocus
-            required
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            autoComplete="current-password"
-            autoFocus
-            required
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit">Login</button>
-        </form>
-      </div>
-    </div>
+    <>
+      {view === "login" && (
+        <div className="App">
+          <h1>Login Page</h1>
+          <div className="login-form">
+            <form onSubmit={Login}>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                autoComplete="email"
+                autoFocus
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <br />
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                autoComplete="current-password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+              <br />
+              <button type="submit">Login</button>
+            </form>
+          </div>
+          <br />
+          <br />
+          <div>
+            <button onClick={() => setView("signup")}>Don't have an account? Sign Up!</button>
+          </div>
+        </div>
+      )}
+      {view === "signup" && (
+        <div className="App">
+          <h1>Sign Up Page</h1>
+          <div className="login-form">
+            <form onSubmit={SignUp}>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                autoComplete="email"
+                autoFocus
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
+              <br />
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Password"
+                autoComplete="current-password"
+                required
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+              <br />
+              <button type="submit">Sign Up</button>
+            </form>
+          </div>
+          <br />
+          <br />
+          <button onClick={() => setView("login")}>Already have an account? Login!</button>
+        </div>
+      )}
+    </>
   );
 }
