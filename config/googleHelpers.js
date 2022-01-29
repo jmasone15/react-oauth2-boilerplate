@@ -18,6 +18,7 @@ switch (process.env.NODE_ENV) {
 };
 
 module.exports = {
+  // Generate the URL where the user will sign in with google.
   getGoogleAuthURL: function getGoogleAuthURL() {
     const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
     const redirectURI = "/api/google/auth"
@@ -36,7 +37,6 @@ module.exports = {
 
     return `${rootUrl}?${querystring.stringify(options)}`
   },
-  // TODO - make an async function
   getTokens: function getTokens({ code, clientId, clientSecret }) {
     const url = "https://oauth2.googleapis.com/token";
     const values = {
@@ -57,6 +57,5 @@ module.exports = {
       console.log("Failed to fetch auth tokens");
       throw new Error(error.message);
     })
-
   }
 }
